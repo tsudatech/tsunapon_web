@@ -1,0 +1,822 @@
+/* ── つなポン 紹介ページの配色 ─────────────────────────────────────────
+   iOS アプリの「ポップ・イエロー」テーマ（tsunapon/UI/Theme.swift）をそのまま反映。
+   bg #FFFBE6   section #FFF3C4   card #FFFFFF   line rgba(27,27,27,.75)
+   ink #1B1B1B  muted #5A5440     main #FF3B5C   accent #2F6BFF
+   tile #FFF8E6 grid #F1EAD0     good #00B26B
+   グラデーション（カードの縁・見出しの帯）  #FF5C8A → #FF9F43 → #FFD21F
+   （パズルちゃんの紹介ページ styles.css の構成を踏襲。あちらは淡い青、こちらは黄色）
+
+   文字はアプリと同じ。見出しは Mochiy Pop One、本文は M PLUS Rounded 1c。
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #fffbe6;
+  --section: #fff3c4;
+  --ink: #1b1b1b;
+  --muted: #5a5440;
+  --line: rgba(27, 27, 27, 0.75);
+  --main: #ff3b5c;
+  --accent: #2f6bff;
+  --tile: #fff8e6;
+  --grid: #f1ead0;
+  --pink-grad: linear-gradient(135deg, #ff5c8a, #ff9f43 55%, #ffd21f);
+  --display: "Mochiy Pop One", "M PLUS Rounded 1c", -apple-system, sans-serif;
+}
+
+body {
+  font-family: "M PLUS Rounded 1c", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  line-height: 1.85;
+  color: var(--ink);
+  background-color: var(--bg);
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background-color: rgba(255, 251, 230, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--grid);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1.5px solid var(--line);
+}
+
+.nav-logo h1 {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+
+.nav-menu a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--main);
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: #a39b7f;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 4px 2px;
+  transition: color 0.2s ease;
+}
+
+.lang-btn:hover,
+.lang-btn.active {
+  color: var(--main);
+}
+
+.lang-separator {
+  color: #e2d6a6;
+  font-size: 0.85rem;
+}
+
+/* Hero：アプリのホームと同じ、背景は黄色にドット */
+.hero {
+  padding: 140px 0 90px;
+  background:
+    radial-gradient(rgba(0, 0, 0, 0.08) 1.6px, transparent 1.8px) 0 0 / 18px 18px,
+    radial-gradient(900px 420px at 80% 10%, #fff7d1 0%, rgba(255, 247, 209, 0) 62%),
+    linear-gradient(#fffbe6, #ffe98f);
+}
+
+.hero-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-balls {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
+}
+
+.hero-balls img {
+  width: 56px;
+  height: 56px;
+  animation: bob 3.2s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.45s);
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-logo img {
+  display: block;
+  width: min(420px, 100%);
+  height: auto;
+}
+
+.hero-tagline {
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  margin: 14px 0 16px;
+}
+
+.hero-description {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 30px;
+  max-width: 34em;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 0.98rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* アプリのホームの「CPU対戦」ボタンと同じ赤 */
+.btn-primary {
+  background: var(--main);
+  color: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-primary:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.btn-outline {
+  background: #fff;
+  color: var(--ink);
+}
+
+.btn-outline:hover {
+  transform: translateY(-1px);
+}
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.app-icon-placeholder {
+  width: 240px;
+  height: 240px;
+  border-radius: 54px;
+  overflow: hidden;
+  background: #fff;
+  border: 3px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(-3deg);
+}
+
+.app-icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Sections：見出しはアプリのカードの見出しと同じ、グラデーションの帯 */
+.section-title {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 16px;
+  padding: 6px 26px;
+  border-radius: 999px;
+  background: var(--pink-grad);
+  color: #fff;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.section-lead {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.98rem;
+  max-width: 46em;
+  margin: 0 auto 40px;
+  text-wrap: balance;
+}
+
+.modes .section-title,
+.features .section-title,
+.download .section-title,
+.privacy .section-title,
+.contact .section-title {
+  margin-bottom: 44px;
+}
+
+.sub-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 56px 0 22px;
+}
+
+/* 共通のカード：白地に細い黒フチ（アプリのカードと同じ） */
+.step-card,
+.burst-card,
+.mode-card,
+.feature-card,
+.download-info,
+.download-requirements,
+.privacy-content,
+.contact-method {
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-card:hover,
+.mode-card:hover,
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(160, 120, 20, 0.16);
+}
+
+/* How to play */
+.howto {
+  padding: 88px 0;
+  background-color: var(--bg);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.step-card {
+  position: relative;
+  padding: 24px 22px;
+}
+
+.step-card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  margin: 14px 0 6px;
+}
+
+.step-card p {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* いちばん点が入る「ミックスバースト」は目立たせる */
+.step-card-hot,
+.burst-card-hot {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(135deg, #fff0f5, #fff6e0) padding-box,
+    var(--pink-grad) border-box;
+}
+
+.step-card-hot h3 {
+  color: #ff3b7a;
+}
+
+.hot-badge {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff5c8a, #ff9f43);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* 玉 ─色─ 玉 ─数字─ 玉 の図（アプリの遊び方と同じ） */
+.step-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 6px;
+  border-radius: 16px;
+  background: var(--tile);
+}
+
+.step-demo img {
+  width: 44px;
+  height: 44px;
+}
+
+.link {
+  display: block;
+  width: 20px;
+  height: 5px;
+  border-radius: 3px;
+  margin: 0 2px;
+}
+
+.link.color {
+  background: #ff7a45;
+}
+
+.link.number {
+  background: #2f9bff;
+}
+
+.bursts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.burst-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+.burst-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--tile);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.burst-card h4 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.burst-card-hot h4 {
+  color: #ff3b7a;
+}
+
+.burst-card p {
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Modes */
+.modes {
+  padding: 88px 0;
+  background-color: var(--section);
+}
+
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.mode-card {
+  padding: 24px 22px;
+}
+
+.mode-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.mode-icon {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--display);
+  font-size: 1.4rem;
+}
+
+.mode-icon-vs {
+  font-size: 1.05rem;
+  background: linear-gradient(135deg, #ff5c8a, #ff9f43 55%, #ffd21f);
+}
+
+.mode-icon-free {
+  background: linear-gradient(135deg, #2f9bff, #3fd0e0 55%, #7be495);
+}
+
+.mode-icon-mission {
+  background: linear-gradient(135deg, #9b5cff, #ff6fd0 55%, #ffb347);
+}
+
+.mode-card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.25rem;
+}
+
+.mode-card p {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.mode-chars {
+  display: flex;
+  gap: 2px;
+  margin-top: 14px;
+}
+
+.mode-chars img {
+  width: 52px;
+  height: 52px;
+}
+
+/* Features */
+.features {
+  padding: 88px 0;
+  background-color: var(--bg);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  padding: 24px 22px;
+}
+
+.feature-icon {
+  margin-bottom: 12px;
+}
+
+.icon-placeholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #ffe45c;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+}
+
+.feature-card h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.feature-card p {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* Download */
+.download {
+  padding: 88px 0;
+  background-color: var(--section);
+}
+
+.download-content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.download-info,
+.download-requirements {
+  padding: 30px 28px;
+}
+
+.download-info h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.download-info p {
+  color: var(--muted);
+  font-size: 0.94rem;
+  margin-bottom: 22px;
+}
+
+.app-store-placeholder {
+  display: inline-block;
+  padding: 13px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--main);
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 0.98rem;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.app-store-placeholder:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.download-requirements h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.download-requirements ul {
+  list-style: none;
+}
+
+.download-requirements li {
+  color: var(--muted);
+  font-size: 0.92rem;
+  padding: 7px 0 7px 20px;
+  position: relative;
+  border-bottom: 1px dashed #eadfbe;
+}
+
+.download-requirements li:last-child {
+  border-bottom: none;
+}
+
+.download-requirements li::before {
+  content: "●";
+  position: absolute;
+  left: 2px;
+  font-size: 0.6rem;
+  top: 13px;
+  color: var(--main);
+}
+
+/* Privacy */
+.privacy {
+  padding: 88px 0;
+  background-color: var(--bg);
+}
+
+.privacy-content {
+  padding: 36px 34px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.privacy-content h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.privacy-content h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin: 26px 0 8px;
+}
+
+.privacy-content p {
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
+.privacy-content a {
+  color: var(--accent);
+}
+
+.privacy-update {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px dashed #eadfbe;
+  font-size: 0.84rem !important;
+  color: #a39b7f !important;
+}
+
+/* Contact */
+.contact {
+  padding: 88px 0;
+  background-color: var(--section);
+}
+
+.contact-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-content > p {
+  color: var(--muted);
+  margin-bottom: 36px;
+}
+
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+  gap: 20px;
+  text-align: left;
+}
+
+.contact-method {
+  padding: 24px;
+}
+
+.contact-method h3 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.contact-method p,
+.contact-method a {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.contact-method a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-method a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  background: var(--bg);
+  border-top: 1px solid var(--grid);
+  padding: 30px 0;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: #a39b7f;
+  font-size: 0.84rem;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-container,
+  .download-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 120px 0 72px;
+    text-align: center;
+  }
+
+  .hero-balls {
+    justify-content: center;
+  }
+
+  .hero-logo img {
+    margin: 0 auto;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-image {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .hero-balls img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .step-demo img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .link {
+    width: 14px;
+  }
+
+  .privacy-content {
+    padding: 26px 20px;
+  }
+}
